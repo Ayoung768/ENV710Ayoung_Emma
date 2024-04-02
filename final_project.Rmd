@@ -1,0 +1,32 @@
+---
+title: "dolphin_strandings"
+author: "Emma Beyer & Ayoung Kim"
+date: "2024-02-27"
+output: pdf_document
+---
+
+```{r output setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup}
+#loading packages
+library(tidyverse)
+library(ggplot2)
+library(GGally)
+library(rmarkdown)
+#setting WD
+setwd("/home/guest/Stat_Modeling_Lab/StatModeling_Lab/GROUP_PROJECT")
+
+#read in data for problems 1-2
+strandings <- read.csv("dolphins.csv")
+#attach data
+attach(strandings)
+
+```
+
+## Data Cleaning
+
+```{r}
+
+```
