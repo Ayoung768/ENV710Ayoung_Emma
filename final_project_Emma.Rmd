@@ -16,10 +16,10 @@ library(ggplot2)
 library(GGally)
 library(rmarkdown)
 #setting WD
-setwd("/home/guest/Stat_Modeling_Lab/StatModeling_Lab/GROUP_PROJECT")
+setwd("/home/guest/Stat_Modeling_Lab/ENV710Ayoung_Emma")
 
 #read in data for problems 1-2
-strandings <- read.csv("dolphins.csv")
+strandings <- read.csv("dolphins_cleaned.csv")
 #attach data
 attach(strandings)
 
@@ -28,5 +28,6 @@ attach(strandings)
 ## Data Cleaning
 
 ```{r}
+cleaned_strandings <- na.omit(strandings)
 
 ```
