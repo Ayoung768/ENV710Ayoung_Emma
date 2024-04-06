@@ -28,6 +28,42 @@ attach(strandings)
 ## Data Cleaning
 
 ```{r}
+#remove NAs
 cleaned_strandings <- na.omit(strandings)
+
+#remove unneeded covariates
+cleaned_strandings <- subset(cleaned_strandings, select = -c(Shot, Fishery.Interaction))
+
+#removing blanks in Age.Class
+cleaned_strandings <- cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Age.Class), ]
+#removing unknowns in Age.Class
+cleaned_strandings <- cleaned_strandings[!cleaned_strandings$Age.Class %in% c("UNKNOWN"), ]
+
+#create binary covariate for wind turbine presence in state
+cleaned_strandings <- cleaned_strandings %>%
+  mutate(turbine_presence = if_else(State %in% c("VA", "NY", "RI", "MA"), 1, 0))
+
+#creating subset using collision observations
+subset <- cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Boat.Collision), ]
+
+subset <- subset[!subset$Boat.Collision %in% c("C"), ]
+
+#count of strandings in wind farm states = 6
+sum(subset$turbine_presence)
+
+#count of strandings in turbine states = 12
+sum(cleaned_strandings$turbine_presence)
+
+plot <- ggplot(cleaned_strandings, aes(x = Length, y = Weight, color = as.factor(turbine_presence))) +
+  geom_point()
+plot
+
+plot1 <- ggplot(cleaned_strandings, aes(x = Weight)) +
+  geom_histogram()
+plot1
+
+plot2 <- ggplot(cleaned_strandings, aes(x = Length, color = Age.Class)) +
+  geom_histogram()
+plot2
 
 ```
