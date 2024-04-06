@@ -38,6 +38,8 @@ cleaned_strandings <- subset(cleaned_strandings, select = -c(Shot, Fishery.Inter
 cleaned_strandings <- cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Age.Class), ]
 #removing unknowns in Age.Class
 cleaned_strandings <- cleaned_strandings[!cleaned_strandings$Age.Class %in% c("UNKNOWN"), ]
+#removing unknowns in Sex
+cleaned_strandings <- cleaned_strandings[!cleaned_strandings$Sex %in% c("UNKNOWN"), ]
 
 #create binary covariate for wind turbine presence in state
 cleaned_strandings <- cleaned_strandings %>%
@@ -51,19 +53,50 @@ subset <- subset[!subset$Boat.Collision %in% c("C"), ]
 #count of strandings in wind farm states = 6
 sum(subset$turbine_presence)
 
-#count of strandings in turbine states = 12
+#count of strandings in turbine states = 11
 sum(cleaned_strandings$turbine_presence)
 
+#visualizing length and weight by presence of turbines
 plot <- ggplot(cleaned_strandings, aes(x = Length, y = Weight, color = as.factor(turbine_presence))) +
   geom_point()
 plot
 
-plot1 <- ggplot(cleaned_strandings, aes(x = Weight)) +
-  geom_histogram()
+#visualizing weight by age class
+avg_weight <- aggregate(Weight ~ Age.Class, data = cleaned_strandings, FUN = mean)
+
+avg_weight <- avg_weight[order(-avg_weight$Weight), ]
+
+plot1 <- ggplot(avg_weight, aes(x = reorder(Age.Class, Weight), y = Weight)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(x = "Age Class", y = "Average Weight") +
+  ggtitle("Average Weight by Age Class")
 plot1
 
-plot2 <- ggplot(cleaned_strandings, aes(x = Length, color = Age.Class)) +
-  geom_histogram()
+#visualizing length by age class
+avg_lengths <- aggregate(Length ~ Age.Class, data = cleaned_strandings, FUN = mean)
+
+avg_lengths <- avg_lengths[order(-avg_lengths$Length), ]
+
+plot2 <- ggplot(avg_lengths, aes(x = reorder(Age.Class, Length), y = Length)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(x = "Age Class", y = "Average Length") +
+  ggtitle("Average Length by Age Class")
 plot2
+
+#visualizing sex by presence of turbines
+plot3 <- ggplot(cleaned_strandings, aes(x = Sex, fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Sex", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Sex vs Presence of Turbines")
+plot3
+
+#visualizing age class by presence of turbines
+age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
+
+plot4 <- ggplot(cleaned_strandings, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Age Class", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Age Class vs Presence of Turbines")
+plot4
 
 ```
