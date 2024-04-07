@@ -46,6 +46,7 @@ cleaned_strandings <- cleaned_strandings %>%
   mutate(turbine_presence = if_else(State %in% c("VA", "NY", "RI", "MA"), 1, 0))
 
 write.csv(cleaned_strandings, "cleaned_strandings", row.names = FALSE)
+#strandings_test <- read.csv("cleaned_strandings")
 
 
 #creating subset using collision observations
@@ -53,8 +54,6 @@ subset <- cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Boat.Collision)
 
 #create new csv file for future editing
 subset <- subset[!subset$Boat.Collision %in% c("C"), ]
-strandings_test <- read.csv("cleaned_strandings")
-
 
 #count of strandings in wind farm states = 6
 sum(subset$turbine_presence)
