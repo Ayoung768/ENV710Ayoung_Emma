@@ -27,7 +27,7 @@ attach(strandings)
 
 ## Data Cleaning
 
-```{r}
+```{r cleaning}
 #remove NAs
 cleaned_strandings <- na.omit(strandings)
 
@@ -150,3 +150,45 @@ plot4 <- ggplot(cleaned_strandings, aes(x = factor(Age.Class, levels = age_class
 plot4
 
 ```
+
+```{r models}
+#Fitting a regression model (Turbine Presence)
+fit_1 <- lm(turbine_presence~1, data = cleaned_strandings)
+#Summary of the regression model fit_1
+summary(fit_1)
+
+#Checking the structure of Cleaned_strandings
+str(cleaned_strandings)
+
+#Fitting a regression model (Wind Turbine presence & length)
+fit_2 <- glm(turbine_presence~Length,family='binomial', data = cleaned_strandings)
+#Summary of the regression model fit_2
+summary(fit_2)
+
+#Plot for fit_1
+fit_2_plot <- ggplot(cleaned_strandings, aes(x =Length, y =turbine_presence)) +
+geom_point(shape = 1) +
+xlab("Length of Bottlenose Dolphins Strandings") +
+ylab("Presence of Wind Turbines") +
+scale_y_continuous(breaks = c(0, 1), labels = c("No", "Yes"),limits = c(0,1))
+fit_2_plot
+
+#Fitting a regression model (Wind Turbine presence & Weight)
+fit_3 <- glm(turbine_presence~Length+Weight,family='binomial', data = cleaned_strandings)
+#Summary of the regression model fit_2
+summary(fit_3)
+
+#Log odds of turbines presence
+cleaned_strandings$log_odds_turbines<-predict(fit_3,type="link")
+#Plot for fit_2
+fit_3_plot <- ggplot(cleaned_strandings, aes(x =Length,y=log_odds_turbines, color=Weight)) +
+geom_point(shape = 1) +
+geom_smooth(method=glm)+
+xlab("Weight of Bottlenose Dolphins Strandings") +
+ylab("Presence of Wind Turbines")
+#Plot
+fit_3_plot
+
+
+```
+
