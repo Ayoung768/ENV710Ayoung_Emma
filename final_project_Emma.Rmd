@@ -74,33 +74,39 @@ age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
 
 boxplot1 <- ggplot(cleaned_strandings, aes(x = factor(Age.Class, levels = age_class_order), y = Weight)) +
   geom_boxplot(color="skyblue") +
-  labs(x = "Age Class", y = "Weight") +
+  labs(x = "Age Class", y = "Weight (kg)") +
   ggtitle("Dolphin Weight by Age Class")
 boxplot1
 
 boxplot2 <- ggplot(cleaned_strandings, aes(x = factor(Age.Class, levels = age_class_order), y = Length)) +
   geom_boxplot(color="skyblue") +
-  labs(x = "Age Class", y = "Length") +
+  labs(x = "Age Class", y = "Length (cm)") +
   ggtitle("Dolphin Length by Age Class")
 boxplot2
 
 state_plot <- ggplot(cleaned_strandings, aes(x = State, y = Length)) +
   geom_boxplot(color="skyblue") +
-  labs(x = "States", y = "Length") +
+  labs(x = "States", y = "Length (cm)") +
   ggtitle("Dolphin Length by State")
 state_plot
+
+state_plot2 <- ggplot(cleaned_strandings, aes(x = State, y = Weight)) +
+  geom_boxplot(color="skyblue") +
+  labs(x = "States", y = "Weight (kg)") +
+  ggtitle("Dolphin Weight by State")
+state_plot2
 
 subset_turbines <- filter(cleaned_strandings, State %in% c("VA", "NY", "RI", "MA"))
 
 state_turbines <- ggplot(subset_turbines, aes(x = State, y = Length)) +
   geom_boxplot(color="skyblue") +
-  labs(x = "States", y = "Length") +
+  labs(x = "States", y = "Length (cm)") +
   ggtitle("Dolphin Length by State")
 state_turbines
 
 state_turbines2 <- ggplot(subset_turbines, aes(x = State, y = Weight)) +
   geom_boxplot(color="skyblue") +
-  labs(x = "States", y = "Weight") +
+  labs(x = "States", y = "Weight (kg)") +
   ggtitle("Dolphin Length by State")
 state_turbines2
 
@@ -112,7 +118,7 @@ avg_weight <- avg_weight[order(-avg_weight$Weight), ]
 
 plot1 <- ggplot(avg_weight, aes(x = reorder(Age.Class, Weight), y = Weight)) +
   geom_bar(stat = "identity", fill = "skyblue") +
-  labs(x = "Age Class", y = "Average Weight") +
+  labs(x = "Age Class", y = "Average Weight (kg)") +
   ggtitle("Average Weight by Age Class")
 plot1
 
