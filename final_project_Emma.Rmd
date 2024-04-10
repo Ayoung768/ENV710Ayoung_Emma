@@ -18,6 +18,8 @@ library(rmarkdown)
 #setting WD
 setwd("/home/guest/Stat_Modeling_Lab/ENV710Ayoung_Emma")
 
+original_data <- read.csv("dolphins.csv")
+
 #read in data for problems 1-2
 strandings <- read.csv("dolphins_cleaned.csv")
 #attach data
@@ -32,7 +34,7 @@ attach(strandings)
 cleaned_strandings <- na.omit(strandings)
 
 #remove unneeded covariates
-cleaned_strandings <- subset(cleaned_strandings, select = -c(Shot, Fishery.Interaction))
+cleaned_strandings <- subset(cleaned_strandings, select = -c(Shot, Fishery.Interaction, Boat.Collision))
 
 #removing blanks in Age.Class
 cleaned_strandings <- cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Age.Class), ]
@@ -160,8 +162,8 @@ summary(fit_1)
 #Checking the structure of Cleaned_strandings
 str(cleaned_strandings)
 
-#Fitting a regression model (Wind Turbine presence & length)
-fit_2 <- glm(turbine_presence~Length,family='binomial', data = cleaned_strandings)
+#Fitting a regression model (finding the odds of different sex in offshore wind states)
+fit_2 <- glm(turbine_presence~Sex,family='binomial', data = cleaned_strandings)
 #Summary of the regression model fit_2
 summary(fit_2)
 
