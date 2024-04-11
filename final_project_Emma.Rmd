@@ -268,6 +268,11 @@ standings_state <- ggplot(cleaned_strandings_test, aes(x = State)) +
   ggtitle("Number of Dolphin Strandings by Offshore Wind States")
 standings_state
 
+plot4 <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Age Class", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Age Class vs Presence of Turbines")
+plot4
 
 ```
 
