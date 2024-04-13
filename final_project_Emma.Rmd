@@ -163,7 +163,7 @@ summary(fit_1)
 str(cleaned_strandings)
 
 #Fitting a regression model (finding the odds of different sex in offshore wind states)
-fit_2 <- glm(turbine_presence~Sex,family='binomial', data = cleaned_strandings)
+fit_2 <- glm(turbine_presence~Sex,family='binomial', data = cleaned_strandings_test)
 #Summary of the regression model fit_2
 summary(fit_2)
 
@@ -192,6 +192,7 @@ ylab("Presence of Wind Turbines")
 fit_3_plot
 
 
+
 ```
 
 ```{r understanding data}
@@ -215,9 +216,10 @@ cleaned_strandings_test <- cleaned_strandings_test %>%
 #count of strandings in wind farm states = 80
 sum(cleaned_strandings_test$turbine_presence)
 
+#create offshore wind subset
 turbine_data <- cleaned_strandings_test[cleaned_strandings_test$State %in% c("VA", "NY", "RI", "MA"), ]
 
-#covarients used: states, turbine presence, sex, length, weight, age class
+#covarients used: states, turbine presence, sex, length, age class
 
 #States info
 table(cleaned_strandings_test$State)
@@ -235,44 +237,57 @@ mean(cleaned_strandings_test$Length)
 # average offshore wind length = 198.175
 mean(turbine_data$Length)
 
-#I like visualizing this data better with box plots
+#reordering age classes so they are from youngest to oldest
 age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
 
-boxplot2 <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), y = Length)) +
+#summary graph of Age Class by Length
+length_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "Age Class", y = "Length (cm)") +
   ggtitle("Dolphin Length by Age Class")
-boxplot2
+length_ageclass
 
-state_plot <- ggplot(cleaned_strandings_test, aes(x = State, y = Length)) +
+#plot of Lengths in each state
+state_length <- ggplot(cleaned_strandings_test, aes(x = State, y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "States", y = "Length (cm)") +
   ggtitle("Dolphin Length by State")
-state_plot
+state_length
 
-state_turbines <- ggplot(turbine_data, aes(x = State, y = Length)) +
+#plot of Lengths in each offshore wind state
+turbinestate_length <- ggplot(turbine_data, aes(x = State, y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "States", y = "Length (cm)") +
   ggtitle("Dolphin Length by State")
-state_turbines
+turbinestate_length
 
+#plot of number of strandings for each offshore wind state
 standings_wf_state <- ggplot(turbine_data, aes(x = State)) +
   geom_bar(fill = "skyblue") +
   labs(x = "States", y = "Number of Strandings") +
   ggtitle("Number of Dolphin Strandings by Offshore Wind States")
 standings_wf_state
 
+#plot of number of strandings for each offshore wind state
 standings_state <- ggplot(cleaned_strandings_test, aes(x = State)) +
   geom_bar(fill = "skyblue") +
   labs(x = "States", y = "Number of Strandings") +
   ggtitle("Number of Dolphin Strandings by Offshore Wind States")
 standings_state
 
-plot4 <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
+#plot of the number of strandings in each age class
+strandings_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
   labs(x = "Age Class", y = "Count", fill = "Presence of Turbines") +
   ggtitle("Age Class vs Presence of Turbines")
-plot4
+strandings_ageclass
+
+#plot of the number of strandings in each sex
+strandings_sex <- ggplot(cleaned_strandings_test, aes(x = factor(Sex), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Sex", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Sex vs Presence of Turbines")
+strandings_sex
 
 ```
 
