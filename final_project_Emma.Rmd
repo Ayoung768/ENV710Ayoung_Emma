@@ -191,6 +191,54 @@ ylab("Presence of Wind Turbines")
 #Plot
 fit_3_plot
 
+# use to find the sample mean of length in states with and without offshore wind
+diff_length <- lm(Length ~ turbine_presence, data = cleaned_strandings_test)
+#summary of linear regression
+summary(diff_length)
+
+#use mutate to create state binary variables
+turbine_data <- turbine_data %>%
+  mutate(
+    VA = ifelse(State == "VA", 1, 0),
+    NY = ifelse(State == "NY", 1, 0),
+    RI = ifelse(State == "RI", 1, 0),
+    MA = ifelse(State == "MA", 1, 0))
+
+#creating a linear regression model
+fit_6 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
+#summary of linear regression
+summary(fit_6)
+
+#finding the mean of agb within VA
+mean_length_VA <- mean(turbine_data$Length[turbine_data$VA == "1"])
+mean_length_VA
+
+#finding the mean of agb within VA
+mean_length_NY <- mean(turbine_data$Length[turbine_data$NY == "1"])
+mean_length_NY
+
+#finding the mean of agb within VA
+mean_length_RI <- mean(turbine_data$Length[turbine_data$RI == "1"])
+mean_length_RI
+
+#finding the mean of agb within VA
+mean_length_MA <- mean(turbine_data$Length[turbine_data$MA == "1"])
+mean_length_MA
+
+#plot of data
+plot6 <- ggplot(turbine_data, aes(x = State, y = Length, color=State)) +
+    geom_point(shape = 1) +
+    geom_hline(yintercept = 260.8889, color = "red") +
+    geom_hline(yintercept = 200.9059, color = "forestgreen") +
+    geom_hline(yintercept = 303, color = "skyblue") +
+    geom_hline(yintercept = 184.6717, color = "purple") +
+
+  xlab("State") +
+  ylab("Length (cm)") +
+  ggtitle("Linear Regression of Length across Offshore Wind States") +
+  labs(color = "States") +
+theme_bw()
+plot6
 
 
 ```
