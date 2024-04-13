@@ -1,6 +1,6 @@
 ---
-title: "Ayoung_Emma_Final_Report"
-author: "Emma Beyer"
+title: "The Effects of Offshore Wind on Bottlenose Dolphin Strandings along the United States East Coast"
+author: "Emma Beyer & Ayoung Kim"
 date: "2024-04-12"
 output: pdf_document
 ---
@@ -39,7 +39,3 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Bibliography
 
-## Appendix
-```{r echo=TRUE, ref.label=knitr::all_labels()}
-
-```

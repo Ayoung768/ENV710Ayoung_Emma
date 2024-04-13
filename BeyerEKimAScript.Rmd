@@ -1,0 +1,20 @@
+---
+title: "Group Project R Script and Outputs"
+author: "Emma Beyer & Ayoung Kim"
+date: "2024-04-13"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set up
+
+## Data Cleaning
+
+## Basic Statistics
+
+## Models
+
+## Plots
