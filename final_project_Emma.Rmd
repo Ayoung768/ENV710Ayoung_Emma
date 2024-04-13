@@ -155,7 +155,7 @@ plot4
 
 ```{r models}
 #Fitting a regression model (Turbine Presence)
-fit_1 <- lm(turbine_presence~1, data = cleaned_strandings)
+fit_1 <- lm(turbine_presence~1, data = cleaned_strandings_test)
 #Summary of the regression model fit_1
 summary(fit_1)
 
@@ -166,6 +166,11 @@ str(cleaned_strandings)
 fit_2 <- glm(turbine_presence~Sex,family='binomial', data = cleaned_strandings_test)
 #Summary of the regression model fit_2
 summary(fit_2)
+
+fit_2 <- glm(turbine_presence~Age.Class,family='binomial', data = cleaned_strandings_test)
+#Summary of the regression model fit_2
+summary(fit_2)
+
 
 #Plot for fit_1
 fit_2_plot <- ggplot(cleaned_strandings, aes(x =Length, y =turbine_presence)) +
@@ -209,19 +214,19 @@ fit_6 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
 #summary of linear regression
 summary(fit_6)
 
-#finding the mean of agb within VA
+#finding the mean of length within VA
 mean_length_VA <- mean(turbine_data$Length[turbine_data$VA == "1"])
 mean_length_VA
 
-#finding the mean of agb within VA
+#finding the mean of length within VA
 mean_length_NY <- mean(turbine_data$Length[turbine_data$NY == "1"])
 mean_length_NY
 
-#finding the mean of agb within VA
+#finding the mean of length within VA
 mean_length_RI <- mean(turbine_data$Length[turbine_data$RI == "1"])
 mean_length_RI
 
-#finding the mean of agb within VA
+#finding the mean of length within VA
 mean_length_MA <- mean(turbine_data$Length[turbine_data$MA == "1"])
 mean_length_MA
 

@@ -18,6 +18,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r models}
+#Fitting a regression model (Turbine Presence)
+fit_1 <- lm(turbine_presence~1, data = cleaned_strandings_test)
+#Summary of the regression model fit_1
+summary(fit_1)
+
+#Fitting a regression model (finding the odds of different age classes in offshore wind states)
+fit_2 <- glm(turbine_presence~Age.Class,family='binomial', data = cleaned_strandings_test)
+#Summary of the regression model fit_2
+summary(fit_2)
+
+# use to find difference in length in states 
+fit_3 <- lm(Length ~ State, data = cleaned_strandings_test)
+#summary of linear regression
+summary(fit_3)
+
+#creating a linear regression model
+fit_4 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
+#summary of linear regression
+summary(fit_4)
 
 ```
 
