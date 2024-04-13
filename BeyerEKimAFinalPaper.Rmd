@@ -10,10 +10,117 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r setup}
+#loading packages
+library(tidyverse)
+library(ggplot2)
+library(GGally)
+library(rmarkdown)
+#setting WD
+setwd("/home/guest/Stat_Modeling_Lab/ENV710Ayoung_Emma")
+
+original_data <- read.csv("dolphins.csv")
+
+#read in data for problems 1-2
+strandings <- read.csv("dolphins_cleaned.csv")
+#attach data
+attach(strandings)
 
 ```
 
 ```{r data cleaning}
+#remove unneeded covariates
+cleaned_strandings_test <- subset(strandings, select = -c(Shot, Fishery.Interaction, Boat.Collision, Weight))
+
+#remove NAs
+cleaned_strandings_test <- na.omit(cleaned_strandings_test)
+
+#removing blanks in Age.Class
+cleaned_strandings_test <- cleaned_strandings_test[!grepl("^\\s*$", cleaned_strandings_test$Age.Class), ]
+#removing unknowns in Age.Class
+cleaned_strandings_test <- cleaned_strandings_test[!cleaned_strandings_test$Age.Class %in% c("UNKNOWN"), ]
+#removing unknowns in Sex
+cleaned_strandings_test <- cleaned_strandings_test[!cleaned_strandings_test$Sex %in% c("UNKNOWN"), ]
+
+#create binary covariate for wind turbine presence in state
+cleaned_strandings_test <- cleaned_strandings_test %>%
+  mutate(turbine_presence = if_else(State %in% c("VA", "NY", "RI", "MA"), 1, 0))
+
+#count of strandings in wind farm states = 80
+sum(cleaned_strandings_test$turbine_presence)
+
+#create offshore wind subset
+turbine_data <- cleaned_strandings_test[cleaned_strandings_test$State %in% c("VA", "NY", "RI", "MA"), ]
+
+```
+
+```{r descriptive stats}
+#States info
+table(cleaned_strandings_test$State)
+# 15 states included
+# Most strandings were in Florida (295) and Texas (306)
+# Least were in Maine (1) and Rhode Island (1)
+# States with offshore wind: Virginia, New York, Rhode Island, and Massachusetts 
+
+#count of strandings in wind farm states = 80
+sum(cleaned_strandings_test$turbine_presence)
+
+#Length info
+# average overall length 194.2091 
+mean(cleaned_strandings_test$Length)
+# average offshore wind length = 198.175
+mean(turbine_data$Length)
+
+#reordering age classes so they are from youngest to oldest
+age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
+
+#summary graph of Age Class by Length
+length_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), y = Length)) +
+  geom_boxplot(fill="skyblue") +
+  labs(x = "Age Class", y = "Length (cm)") +
+  ggtitle("Dolphin Length by Age Class")
+length_ageclass
+
+#plot of Lengths in each state
+state_length <- ggplot(cleaned_strandings_test, aes(x = State, y = Length)) +
+  geom_boxplot(fill="skyblue") +
+  labs(x = "States", y = "Length (cm)") +
+  ggtitle("Dolphin Length by State")
+state_length
+
+#plot of Lengths in each offshore wind state
+turbinestate_length <- ggplot(turbine_data, aes(x = State, y = Length)) +
+  geom_boxplot(fill="skyblue") +
+  labs(x = "States", y = "Length (cm)") +
+  ggtitle("Dolphin Length by State")
+turbinestate_length
+
+#plot of number of strandings for each offshore wind state
+standings_wf_state <- ggplot(turbine_data, aes(x = State)) +
+  geom_bar(fill = "skyblue") +
+  labs(x = "States", y = "Number of Strandings") +
+  ggtitle("Number of Dolphin Strandings by Offshore Wind States")
+standings_wf_state
+
+#plot of number of strandings for each offshore wind state
+standings_state <- ggplot(cleaned_strandings_test, aes(x = State)) +
+  geom_bar(fill = "skyblue") +
+  labs(x = "States", y = "Number of Strandings") +
+  ggtitle("Number of Dolphin Strandings by Offshore Wind States")
+standings_state
+
+#plot of the number of strandings in each age class
+strandings_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Age Class", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Age Class vs Presence of Turbines")
+strandings_ageclass
+
+#plot of the number of strandings in each sex
+strandings_sex <- ggplot(cleaned_strandings_test, aes(x = factor(Sex), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Sex", y = "Count", fill = "Presence of Turbines") +
+  ggtitle("Sex vs Presence of Turbines")
+strandings_sex
 
 ```
 
