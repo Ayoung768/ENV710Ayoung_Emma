@@ -191,8 +191,8 @@ ylab("Presence of Wind Turbines")
 #Plot
 fit_3_plot
 
-# use to find difference in length in states with offshore wind
-diff_length <- lm(Length ~ State, data = turbine_data)
+# use to find difference in length in states 
+diff_length <- lm(Length ~ State, data = cleaned_strandings_test)
 #summary of linear regression
 summary(diff_length)
 
