@@ -98,7 +98,6 @@ standings_wf_state <- ggplot(turbine_data, aes(x = State)) +
   ggtitle("Number of Bottlenose Dolphin Strandings by Offshore Wind States")
 standings_wf_state
 
-
 #Length info
 # average overall length 194.2091 
 mean(cleaned_strandings$Length)
