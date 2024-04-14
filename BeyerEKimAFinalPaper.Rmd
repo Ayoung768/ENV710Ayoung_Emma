@@ -74,6 +74,10 @@ sum(cleaned_strandings$turbine_presence)
 #count of total number of stranding = 1419
 nrow(cleaned_strandings)
 
+#summary statistics of all variables
+summary_stats <- summary(cleaned_strandings)
+summary_stats
+
 #reordering age classes so they are from youngest to oldest
 age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
 
@@ -103,6 +107,13 @@ standings_wf_state
 mean(cleaned_strandings$Length)
 # average offshore wind length = 198.175
 mean(turbine_data$Length)
+# variance of all lengths = 4270.962 so 65.37 cm deviation from the mean
+variance_all <- var(cleaned_strandings$Length)
+variance_all
+# variance of offshore wind lengths = 6133.309 so 78.36 cm deviation from the mean
+variance_osw <- var(turbine_data$Length)
+variance_osw
+
 
 #summary graph of Age Class by Length
 length_ageclass <- ggplot(cleaned_strandings, 
@@ -133,9 +144,11 @@ ave_length_ageclass <-
   aggregate(Length ~ Age.Class, data = cleaned_strandings, FUN = mean)
 ave_length_ageclass
 
-#count of strandings in offshore states by age class ADULT	32, PUP/CALF	21, SUBADULT	26, YEARLING	1	
-count_ageclass <- 
-  aggregate(turbine_presence ~ Age.Class, data = cleaned_strandings, FUN = sum)
+#count of strandings in all states by age class ADULT	669, PUP/CALF	335, SUBADULT	308, YEARLING	107
+table(cleaned_strandings$Age.Class)
+
+#count of strandings in offshore wind states by age class ADULT	32, PUP/CALF	21, SUBADULT	26, YEARLING	1	
+count_ageclass <- aggregate(turbine_presence ~ Age.Class, data = cleaned_strandings, FUN = sum)
 count_ageclass
 
 #plot of the number of strandings in each age class
@@ -147,11 +160,14 @@ strandings_ageclass <- ggplot(cleaned_strandings,
   ggtitle("Age Class of Bottlenose Dolphins vs Presence of Turbines")
 strandings_ageclass
 
-#Age Class Info 
+#Sex Info 
 #finding ave length per sex: FEMALE	191.8816, MALE	195.8511	
 ave_length_sex <- 
   aggregate(Length ~ Sex, data = cleaned_strandings, FUN = mean)
 ave_length_sex
+
+#count of strandings in all states by sex FEMALE 587, MALE 832
+table(cleaned_strandings$Sex)
 
 #count of strandings in offshore states by sex FEMALE	32, MALE	48	
 count_sex <- 
