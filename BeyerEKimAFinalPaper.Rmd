@@ -197,15 +197,17 @@ summary(fit_4)
 
 ## Results
 
-```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} FIGURE CAPTION HERE!!!!!!"}
-
-
-
-```
-
 ## Discussion/Results
 
 ## Description of Participant Roles
 
 ## Bibliography
+
+## Appendix
+
+```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} FIGURE CAPTION HERE!!!!!!"}
+
+
+
+```
 
