@@ -15,12 +15,14 @@ library(tidyverse)
 library(ggplot2)
 library(GGally)
 library(rmarkdown)
+
 #setting WD
 setwd("/home/guest/Stat_Modeling_Lab/ENV710Ayoung_Emma")
 
+#read in original data
 original_data <- read.csv("dolphins.csv")
 
-#read in data for problems 1-2
+#read in data with unneeded variables
 strandings <- read.csv("dolphins_cleaned.csv")
 #attach data
 attach(strandings)
@@ -28,119 +30,162 @@ attach(strandings)
 ```
 
 ```{r data cleaning}
-#remove unneeded covariates
-cleaned_strandings_test <- subset(strandings, select = -c(Shot, Fishery.Interaction, Boat.Collision, Weight))
+#remove unneeded covariates in cleaned data
+cleaned_strandings <- subset(strandings, select = -c(Shot, Fishery.Interaction, Boat.Collision, Weight))
 
-#remove NAs
-cleaned_strandings_test <- na.omit(cleaned_strandings_test)
+#remove NAs from chosen variables
+cleaned_strandings <- na.omit(cleaned_strandings)
 
-#removing blanks in Age.Class
-cleaned_strandings_test <- cleaned_strandings_test[!grepl("^\\s*$", cleaned_strandings_test$Age.Class), ]
+#removing blanks in Age.Class variable
+cleaned_strandings <- 
+  cleaned_strandings[!grepl("^\\s*$", cleaned_strandings$Age.Class), ]
 #removing unknowns in Age.Class
-cleaned_strandings_test <- cleaned_strandings_test[!cleaned_strandings_test$Age.Class %in% c("UNKNOWN"), ]
-#removing unknowns in Sex
-cleaned_strandings_test <- cleaned_strandings_test[!cleaned_strandings_test$Sex %in% c("UNKNOWN"), ]
+cleaned_strandings <- 
+  cleaned_strandings[!cleaned_strandings$Age.Class %in% c("UNKNOWN"), ]
 
-#create binary covariate for wind turbine presence in state
-cleaned_strandings_test <- cleaned_strandings_test %>%
+#removing unknowns in Sex variable
+cleaned_strandings <- 
+  cleaned_strandings[!cleaned_strandings$Sex %in% c("UNKNOWN"), ]
+
+#create binary covariate for states with and without offshore wind
+cleaned_strandings <- cleaned_strandings %>%
   mutate(turbine_presence = if_else(State %in% c("VA", "NY", "RI", "MA"), 1, 0))
 
-#count of strandings in wind farm states = 80
-sum(cleaned_strandings_test$turbine_presence)
+#create subset of only states with offshore wind
+turbine_data <- 
+  cleaned_strandings[cleaned_strandings$State %in% 
+                            c("VA", "NY", "RI", "MA"), ]
 
-#create offshore wind subset
-turbine_data <- cleaned_strandings_test[cleaned_strandings_test$State %in% c("VA", "NY", "RI", "MA"), ]
+#use mutate to create state binary variables for fit_4
+turbine_data <- turbine_data %>%
+  mutate(
+    VA = ifelse(State == "VA", 1, 0),
+    NY = ifelse(State == "NY", 1, 0),
+    RI = ifelse(State == "RI", 1, 0),
+    MA = ifelse(State == "MA", 1, 0))
+
 
 ```
 
 ```{r descriptive stats}
+#count of strandings in wind farm states = 80
+sum(cleaned_strandings$turbine_presence)
+
+#count of total number of stranding = 1419
+nrow(cleaned_strandings)
+
+#reordering age classes so they are from youngest to oldest
+age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
+
 #States info
-table(cleaned_strandings_test$State)
+table(cleaned_strandings$State)
 # 15 states included
 # Most strandings were in Florida (295) and Texas (306)
 # Least were in Maine (1) and Rhode Island (1)
 # States with offshore wind: Virginia, New York, Rhode Island, and Massachusetts 
 
-#count of strandings in wind farm states = 80
-sum(cleaned_strandings_test$turbine_presence)
+#plot of number of strandings for all states
+standings_state <- ggplot(cleaned_strandings, aes(x = State)) +
+  geom_bar(fill = "skyblue") +
+  labs(x = "States", y = "Number of Strandings") +
+  ggtitle("Number of Bottlenose Dolphin Strandings for all States")
+standings_state
+
+#plot of number of strandings for each offshore wind state
+standings_wf_state <- ggplot(turbine_data, aes(x = State)) +
+  geom_bar(fill = "skyblue") +
+  labs(x = "States", y = "Number of Strandings") +
+  ggtitle("Number of Bottlenose Dolphin Strandings by Offshore Wind States")
+standings_wf_state
+
 
 #Length info
 # average overall length 194.2091 
-mean(cleaned_strandings_test$Length)
+mean(cleaned_strandings$Length)
 # average offshore wind length = 198.175
 mean(turbine_data$Length)
 
-#reordering age classes so they are from youngest to oldest
-age_class_order <- c("PUP/CALF", "YEARLING", "SUBADULT", "ADULT")
-
 #summary graph of Age Class by Length
-length_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), y = Length)) +
+length_ageclass <- ggplot(cleaned_strandings, 
+                          aes(x = factor(Age.Class, levels = age_class_order), 
+                              y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "Age Class", y = "Length (cm)") +
-  ggtitle("Dolphin Length by Age Class")
+  ggtitle("Stranded Bottlenose Dolphin Length (cm) by Age Class")
 length_ageclass
 
 #plot of Lengths in each state
-state_length <- ggplot(cleaned_strandings_test, aes(x = State, y = Length)) +
+state_length <- ggplot(cleaned_strandings, aes(x = State, y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "States", y = "Length (cm)") +
-  ggtitle("Dolphin Length by State")
+  ggtitle("Stranded Bottlenose Dolphin Length (cm) by State")
 state_length
 
 #plot of Lengths in each offshore wind state
 turbinestate_length <- ggplot(turbine_data, aes(x = State, y = Length)) +
   geom_boxplot(fill="skyblue") +
   labs(x = "States", y = "Length (cm)") +
-  ggtitle("Dolphin Length by State")
+  ggtitle("Stranded Bottlenose Dolphin Length (cm) by States with Offshore Wind")
 turbinestate_length
 
-#plot of number of strandings for each offshore wind state
-standings_wf_state <- ggplot(turbine_data, aes(x = State)) +
-  geom_bar(fill = "skyblue") +
-  labs(x = "States", y = "Number of Strandings") +
-  ggtitle("Number of Dolphin Strandings by Offshore Wind States")
-standings_wf_state
+#Age Class Info 
+#finding ave length per age class: PUP/CALF 107.1709, YEARLING 163.3439, SUBADULT	194.0060, ADULT	242.8233
+ave_length_ageclass <- 
+  aggregate(Length ~ Age.Class, data = cleaned_strandings, FUN = mean)
+ave_length_ageclass
 
-#plot of number of strandings for each offshore wind state
-standings_state <- ggplot(cleaned_strandings_test, aes(x = State)) +
-  geom_bar(fill = "skyblue") +
-  labs(x = "States", y = "Number of Strandings") +
-  ggtitle("Number of Dolphin Strandings by Offshore Wind States")
-standings_state
+#count of strandings in offshore states by age class ADULT	32, PUP/CALF	21, SUBADULT	26, YEARLING	1	
+count_ageclass <- 
+  aggregate(turbine_presence ~ Age.Class, data = cleaned_strandings, FUN = sum)
+count_ageclass
 
 #plot of the number of strandings in each age class
-strandings_ageclass <- ggplot(cleaned_strandings_test, aes(x = factor(Age.Class, levels = age_class_order), fill = factor(turbine_presence))) +
+strandings_ageclass <- ggplot(cleaned_strandings, 
+                              aes(x = factor(Age.Class, levels = age_class_order), 
+                                  fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
-  labs(x = "Age Class", y = "Count", fill = "Presence of Turbines") +
-  ggtitle("Age Class vs Presence of Turbines")
+  labs(x = "Age Class", y = "Number of Strandings", fill = "Presence of Turbines") +
+  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Turbines")
 strandings_ageclass
 
+#Age Class Info 
+#finding ave length per sex: FEMALE	191.8816, MALE	195.8511	
+ave_length_sex <- 
+  aggregate(Length ~ Sex, data = cleaned_strandings, FUN = mean)
+ave_length_sex
+
+#count of strandings in offshore states by sex FEMALE	32, MALE	48	
+count_sex <- 
+  aggregate(turbine_presence ~ Sex, data = cleaned_strandings, FUN = sum)
+count_sex
+
 #plot of the number of strandings in each sex
-strandings_sex <- ggplot(cleaned_strandings_test, aes(x = factor(Sex), fill = factor(turbine_presence))) +
+strandings_sex <- ggplot(cleaned_strandings, 
+                         aes(x = factor(Sex), fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
-  labs(x = "Sex", y = "Count", fill = "Presence of Turbines") +
-  ggtitle("Sex vs Presence of Turbines")
+  labs(x = "Sex", y = "Number of Strandings", fill = "Presence of Turbines") +
+  ggtitle("Sex of Bottlenose Dolphins vs Presence of Turbines")
 strandings_sex
 
 ```
 
 ```{r models}
 #Fitting a regression model (Turbine Presence)
-fit_1 <- lm(turbine_presence~1, data = cleaned_strandings_test)
+fit_1 <- lm(turbine_presence~1, data = cleaned_strandings)
 #Summary of the regression model fit_1
 summary(fit_1)
 
 #Fitting a regression model (finding the odds of different age classes in offshore wind states)
-fit_2 <- glm(turbine_presence~Age.Class,family='binomial', data = cleaned_strandings_test)
+fit_2 <- glm(turbine_presence~Age.Class,family='binomial', data = cleaned_strandings)
 #Summary of the regression model fit_2
 summary(fit_2)
 
 # use to find difference in length in states 
-fit_3 <- lm(Length ~ State, data = cleaned_strandings_test)
+fit_3 <- lm(Length ~ State, data = cleaned_strandings)
 #summary of linear regression
 summary(fit_3)
 
-#creating a linear regression model
+#finding significance of dolphin length across offshore wind states
 fit_4 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
 #summary of linear regression
 summary(fit_4)
