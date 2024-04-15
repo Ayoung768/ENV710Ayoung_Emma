@@ -209,6 +209,10 @@ fit_4 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
 #summary of linear regression
 summary(fit_4)
 
+#set up a multi-panel plot layout
+par(mfrow = c(2, 2))
+plot(fit_4)
+
 #finding the mean of length within VA
 mean_length_VA <- mean(turbine_data$Length[turbine_data$VA == "1"])
 mean_length_VA
