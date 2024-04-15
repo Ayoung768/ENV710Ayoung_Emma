@@ -6,10 +6,10 @@ output: pdf_document
 ---
 
 ```{r output setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup}
+```{r setup, include=FALSE}
 #loading packages
 library(tidyverse)
 library(ggplot2)
@@ -29,7 +29,7 @@ attach(strandings)
 
 ```
 
-```{r data cleaning}
+```{r data cleaning, include=FALSE}
 #remove unneeded covariates in cleaned data
 cleaned_strandings <- subset(strandings, select = -c(Shot, Fishery.Interaction, Boat.Collision, Weight))
 
@@ -67,7 +67,7 @@ turbine_data <- turbine_data %>%
 
 ```
 
-```{r descriptive stats}
+```{r descriptive stats, include=FALSE}
 #count of strandings in wind farm states = 80
 sum(cleaned_strandings$turbine_presence)
 
@@ -184,7 +184,7 @@ strandings_sex
 
 ```
 
-```{r models}
+```{r models, include=FALSE}
 #Fitting a regression model (Turbine Presence)
 fit_1 <- lm(turbine_presence~1, data = cleaned_strandings)
 #Summary of the regression model fit_1
@@ -236,7 +236,7 @@ standings_state <- ggplot(cleaned_strandings, aes(x = State, fill = State_color)
   geom_bar() +
   scale_fill_manual(values = state_colors) +  
   labs(x = "States", y = "Number of Strandings") +
-  ggtitle("Number of Bottlenose Dolphin Strandings for all States") +
+  ggtitle("Number of Bottlenose Dolphin Strandings by States") +
   theme(legend.position = "none") 
 
 standings_state
@@ -258,27 +258,43 @@ state_length
 
 ```
 
-```{r plot 3, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each age class of bottlenose dolphin. Strandings from states with active offshore wind projects are labeled in blue (1) and strandings from the other states are labeled in red (0)."}
+```{r plot 3, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each age class of bottlenose dolphin and whether or not there is a presence of offshore wind."}
 
-#plot of the number of strandings in each age class
+# color bars
+fill_colors <- c("0" = "skyblue", "1" = "red")
+
+# change legend labels
+fill_labels <- c("0" = "No", "1" = "Yes")
+
+# plot of the number of strandings in each age class 
 strandings_ageclass <- ggplot(cleaned_strandings, 
                               aes(x = factor(Age.Class, levels = age_class_order), 
                                   fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
-  labs(x = "Age Class", y = "Number of Strandings", fill = "Presence of Turbines") +
-  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Turbines")
+  scale_fill_manual(values = fill_colors, labels = fill_labels) +  
+  labs(x = "Age Class", y = "Number of Strandings", fill = "Presence of Offshore Wind") +
+  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Offshore Wind")
+
 strandings_ageclass
 
 ```
 
-```{r plot 4, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each sex. Strandings from states with active offshore wind projects are labeled in blue (1) and strandings from the other states are labeled in red (0)."}
+```{r plot 4, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each sex and whether or not there is a presence of offshore wind."}
 
-#plot of the number of strandings in each sex
+# change bar colors
+fill_colors <- c("0" = "skyblue", "1" = "red")
+
+# change legend labels
+fill_labels <- c("0" = "No", "1" = "Yes")
+
+# plot of the number of strandings in each sex with specified colors and legend labels
 strandings_sex <- ggplot(cleaned_strandings, 
                          aes(x = factor(Sex), fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
-  labs(x = "Sex", y = "Number of Strandings", fill = "Presence of Turbines") +
-  ggtitle("Sex of Bottlenose Dolphins vs Presence of Turbines")
+  scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Specify colors and labels
+  labs(x = "Sex", y = "Number of Strandings", fill = "Presence of Offshore Wind") +
+  ggtitle("Sex of Bottlenose Dolphins vs Presence of Offshore Wind")
+
 strandings_sex
 
 ```
