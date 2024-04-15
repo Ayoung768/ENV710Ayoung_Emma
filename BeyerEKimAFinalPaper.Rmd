@@ -200,10 +200,30 @@ fit_3 <- lm(Length ~ State, data = cleaned_strandings)
 #summary of linear regression
 summary(fit_3)
 
+#set up a multi-panel plot layout
+par(mfrow = c(2, 2))
+plot(fit_3)
+
 #finding significance of dolphin length across offshore wind states
 fit_4 <- lm(Length ~ VA + NY + RI + MA, data = turbine_data)
 #summary of linear regression
 summary(fit_4)
+
+#finding the mean of length within VA
+mean_length_VA <- mean(turbine_data$Length[turbine_data$VA == "1"])
+mean_length_VA
+
+#finding the mean of length within VA
+mean_length_NY <- mean(turbine_data$Length[turbine_data$NY == "1"])
+mean_length_NY
+
+#finding the mean of length within VA
+mean_length_RI <- mean(turbine_data$Length[turbine_data$RI == "1"])
+mean_length_RI
+
+#finding the mean of length within VA
+mean_length_MA <- mean(turbine_data$Length[turbine_data$MA == "1"])
+mean_length_MA
 
 ```
 
@@ -223,7 +243,6 @@ summary(fit_4)
 
 ```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
 
-
 # coloring offshore wind states red
 state_colors <- c("NY" = "red", "MA" = "red", "VA" = "red", "RI" = "red", 
                   "Other" = "skyblue")  
@@ -236,7 +255,8 @@ standings_state <- ggplot(cleaned_strandings, aes(x = State, fill = State_color)
   geom_bar() +
   scale_fill_manual(values = state_colors) +  
   labs(x = "States", y = "Number of Strandings") +
-  ggtitle("Number of Bottlenose Dolphin Strandings by States") +
+  ggtitle("Number of Bottlenose Dolphin Strandings by States")+
+  theme_bw() +
   theme(legend.position = "none") 
 
 standings_state
@@ -250,7 +270,8 @@ state_length <- ggplot(cleaned_strandings, aes(x = State, y = Length, fill = Sta
   geom_boxplot() +
   scale_fill_manual(values = state_colors) +  
   labs(x = "States", y = "Length (cm)") +
-  ggtitle("Stranded Bottlenose Dolphin Length (cm) by State") +
+  ggtitle("Stranded Bottlenose Dolphin Length (cm) by State")+
+  theme_bw() +
   theme(legend.position = "none")  
 
 # Display the plot
@@ -272,8 +293,10 @@ strandings_ageclass <- ggplot(cleaned_strandings,
                                   fill = factor(turbine_presence))) +
   geom_bar(position = "stack") +
   scale_fill_manual(values = fill_colors, labels = fill_labels) +  
-  labs(x = "Age Class", y = "Number of Strandings", fill = "Presence of Offshore Wind") +
-  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Offshore Wind")
+  labs(x = "Age Class", y = "Number of Strandings", 
+       fill = "Presence of Offshore Wind") +
+  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Offshore Wind") +
+theme_bw()
 
 strandings_ageclass
 
@@ -293,9 +316,32 @@ strandings_sex <- ggplot(cleaned_strandings,
   geom_bar(position = "stack") +
   scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Specify colors and labels
   labs(x = "Sex", y = "Number of Strandings", fill = "Presence of Offshore Wind") +
-  ggtitle("Sex of Bottlenose Dolphins vs Presence of Offshore Wind")
-
+  ggtitle("Sex of Bottlenose Dolphins vs Presence of Offshore Wind") +
+theme_bw()
 strandings_sex
 
 ```
 
+```{r plot 5, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The probability of finding a stranded dolphin from each age group in states with offshore wind projects."}
+
+
+
+```
+
+```{r plot 6, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} Linear regression of the lengths (cm) of stranded dolphin across states with offshore wind projects."}
+
+#plot of data
+plot6 <- ggplot(turbine_data, aes(x = State, y = Length, color=State)) +
+    geom_point(shape = 1) +
+    geom_hline(yintercept = 260.8889, color = "red") +
+    geom_hline(yintercept = 200.9059, color = "forestgreen") +
+    geom_hline(yintercept = 303, color = "skyblue") +
+    geom_hline(yintercept = 184.6717, color = "purple") +
+  xlab("State") +
+  ylab("Length (cm)") +
+  ggtitle("Linear Regression of Length across Offshore Wind States") +
+  labs(color = "States") +
+theme_bw()
+plot6
+
+```
