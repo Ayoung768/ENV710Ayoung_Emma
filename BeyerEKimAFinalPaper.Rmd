@@ -334,7 +334,7 @@ strandings_sex
 
 ```{r plot 6, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} Linear regression of the lengths (cm) of stranded dolphin across states with offshore wind projects."}
 
-#plot of data
+#plot
 plot6 <- ggplot(turbine_data, aes(x = State, y = Length, color=State)) +
     geom_point(shape = 1) +
     geom_hline(yintercept = 260.8889, color = "red") +
