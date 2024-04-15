@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r output setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r setup}
@@ -221,9 +221,65 @@ summary(fit_4)
 
 ## Appendix
 
-```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} FIGURE CAPTION HERE!!!!!!"}
+```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
 
 
+# coloring offshore wind states red
+state_colors <- c("NY" = "red", "MA" = "red", "VA" = "red", "RI" = "red", 
+                  "Other" = "skyblue")  
+
+# coloring all other states blue
+cleaned_strandings$State_color <- ifelse(cleaned_strandings$State %in% c("NY", "MA", "VA", "RI"), cleaned_strandings$State, "Other")
+
+# plot of number of strandings for all states 
+standings_state <- ggplot(cleaned_strandings, aes(x = State, fill = State_color)) +
+  geom_bar() +
+  scale_fill_manual(values = state_colors) +  
+  labs(x = "States", y = "Number of Strandings") +
+  ggtitle("Number of Bottlenose Dolphin Strandings for all States") +
+  theme(legend.position = "none") 
+
+standings_state
+
+```
+
+```{r plot 2, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The distribution of length (cm) of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
+
+# plot of stranded bottlenose dolphin length by state with specific states colored differently
+state_length <- ggplot(cleaned_strandings, aes(x = State, y = Length, fill = State_color)) +
+  geom_boxplot() +
+  scale_fill_manual(values = state_colors) +  
+  labs(x = "States", y = "Length (cm)") +
+  ggtitle("Stranded Bottlenose Dolphin Length (cm) by State") +
+  theme(legend.position = "none")  
+
+# Display the plot
+state_length
+
+```
+
+```{r plot 3, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each age class of bottlenose dolphin. Strandings from states with active offshore wind projects are labeled in blue (1) and strandings from the other states are labeled in red (0)."}
+
+#plot of the number of strandings in each age class
+strandings_ageclass <- ggplot(cleaned_strandings, 
+                              aes(x = factor(Age.Class, levels = age_class_order), 
+                                  fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Age Class", y = "Number of Strandings", fill = "Presence of Turbines") +
+  ggtitle("Age Class of Bottlenose Dolphins vs Presence of Turbines")
+strandings_ageclass
+
+```
+
+```{r plot 4, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each sex. Strandings from states with active offshore wind projects are labeled in blue (1) and strandings from the other states are labeled in red (0)."}
+
+#plot of the number of strandings in each sex
+strandings_sex <- ggplot(cleaned_strandings, 
+                         aes(x = factor(Sex), fill = factor(turbine_presence))) +
+  geom_bar(position = "stack") +
+  labs(x = "Sex", y = "Number of Strandings", fill = "Presence of Turbines") +
+  ggtitle("Sex of Bottlenose Dolphins vs Presence of Turbines")
+strandings_sex
 
 ```
 
