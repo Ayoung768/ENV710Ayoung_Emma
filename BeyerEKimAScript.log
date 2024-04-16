@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  16 APR 2024 11:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  16 APR 2024 11:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -512,34 +512,46 @@ Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/models-3.pdf  used 
 <BeyerEKimAScript_files/figure-latex/plot 1-1.pdf, id=134, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 1-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 1-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 1-1.pdf  used on input line 778.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 1-1.pdf  used on input line 800.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAScript_files/figure-latex/plot 2-1.pdf, id=135, 469.755pt x 289.08pt>
+[16 <./BeyerEKimAScript_files/figure-latex/plot 1-1.pdf>]
+<BeyerEKimAScript_files/figure-latex/plot 2-1.pdf, id=145, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 2-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 2-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 2-1.pdf  used on input line 787.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 2-1.pdf  used on input line 825.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAScript_files/figure-latex/plot 3-1.pdf, id=136, 469.755pt x 289.08pt>
+<BeyerEKimAScript_files/figure-latex/plot 3-1.pdf, id=146, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 3-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 3-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 3-1.pdf  used on input line 796.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 3-1.pdf  used on input line 857.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAScript_files/figure-latex/plot 4-1.pdf, id=137, 469.755pt x 289.08pt>
+[17 <./BeyerEKimAScript_files/figure-latex/plot 2-1.pdf>]
+<BeyerEKimAScript_files/figure-latex/plot 4-1.pdf, id=158, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 4-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 4-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 4-1.pdf  used on input line 805.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 4-1.pdf  used on input line 886.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAScript_files/figure-latex/plot 5-1.pdf, id=138, 469.755pt x 289.08pt>
+[18 <./BeyerEKimAScript_files/figure-latex/plot 3-1.pdf> <./BeyerEKimAScript_files/figure-latex/plot 4-1.pdf>]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[19]
+<BeyerEKimAScript_files/figure-latex/plot 5-1.pdf, id=180, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 5-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 5-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 5-1.pdf  used on input line 814.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 5-1.pdf  used on input line 982.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAScript_files/figure-latex/plot 6-1.pdf, id=139, 469.755pt x 289.08pt>
+[20 <./BeyerEKimAScript_files/figure-latex/plot 5-1.pdf>]
+<BeyerEKimAScript_files/figure-latex/plot 6-1.pdf, id=191, 469.755pt x 289.08pt>
 File: BeyerEKimAScript_files/figure-latex/plot 6-1.pdf Graphic file (type pdf)
 <use BeyerEKimAScript_files/figure-latex/plot 6-1.pdf>
-Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 6-1.pdf  used on input line 823.
+Package pdftex.def Info: BeyerEKimAScript_files/figure-latex/plot 6-1.pdf  used on input line 1009.
 (pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-[16 <./BeyerEKimAScript_files/figure-latex/plot 1-1.pdf> <./BeyerEKimAScript_files/figure-latex/plot 2-1.pdf>] [17 <./BeyerEKimAScript_files/figure-latex/plot 3-1.pdf> <./BeyerEKimAScript_files/figure-latex/plot 4-1.pdf>] [18 <./BeyerEKimAScript_files/figure-latex/plot 5-1.pdf> <./BeyerEKimAScript_files/figure-latex/plot 6-1.pdf>] (./BeyerEKimAScript.aux)
+[21 <./BeyerEKimAScript_files/figure-latex/plot 6-1.pdf>] (./BeyerEKimAScript.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
@@ -549,18 +561,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 11575 strings out of 476064
- 181998 string characters out of 5792592
+ 11578 strings out of 476064
+ 182019 string characters out of 5792592
  1944493 words of memory out of 5000000
  33505 multiletter control sequences out of 15000+600000
  581357 words of font info for 60 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,6n,93p,404b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,6n,93p,500b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on BeyerEKimAScript.pdf (18 pages, 631287 bytes).
+Output written on BeyerEKimAScript.pdf (21 pages, 636864 bytes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 170 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

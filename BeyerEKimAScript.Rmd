@@ -245,7 +245,7 @@ mean_length_MA
 
 ```
 
-```{r plot 1, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
+```{r plot 1, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
 
 # coloring offshore wind states red
 state_colors <- c("NY" = "red", "MA" = "red", "VA" = "red", "RI" = "red", 
@@ -267,7 +267,7 @@ standings_state
 
 ```
 
-```{r plot 2, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The distribution of length (cm) of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
+```{r plot 2, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The distribution of length (cm) of stranded dolphins reported in each state across the East Coast. States with active offshore wind projects are labeled in red."}
 
 # plot of stranded bottlenose dolphin length by state with specific states colored differently
 state_length <- ggplot(cleaned_strandings, aes(x = State, y = Length, fill = State_color)) +
@@ -283,7 +283,7 @@ state_length
 
 ```
 
-```{r plot 3, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each age class of bottlenose dolphin and whether or not there is a presence of offshore wind."}
+```{r plot 3, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each age class of bottlenose dolphin and whether or not there is a presence of offshore wind."}
 
 # color bars
 fill_colors <- c("0" = "skyblue", "1" = "red")
@@ -306,7 +306,7 @@ strandings_ageclass
 
 ```
 
-```{r plot 4, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each sex and whether or not there is a presence of offshore wind."}
+```{r plot 4, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The number of strandings for each sex and whether or not there is a presence of offshore wind."}
 
 # change bar colors
 fill_colors <- c("0" = "skyblue", "1" = "red")
@@ -326,7 +326,7 @@ strandings_sex
 
 ```
 
-```{r plot 5, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The distribution of lengths (cm) of stranded bottlenose dolphins across all states."}
+```{r plot 5, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} The distribution of lengths (cm) of stranded bottlenose dolphins across all states."}
 
 fit_3_plot <- ggplot(cleaned_strandings, aes(x = State, y = Length)) +
 
@@ -413,7 +413,7 @@ fit_3_plot
 
 ```
 
-```{r plot 6, message=FALSE, echo=FALSE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} Linear regression of the lengths (cm) of stranded dolphin across states with offshore wind projects."}
+```{r plot 6, message=FALSE, echo=TRUE, warning=FALSE,fig.align="center", fig.height=4, out.width="70%", include=T, fig.cap="\\label{fig:figs} Linear regression of the lengths (cm) of stranded dolphin across states with offshore wind projects."}
 
 #plot
 plot6 <- ggplot(turbine_data, aes(x = State, y = Length, color=State)) +
