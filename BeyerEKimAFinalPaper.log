@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  15 APR 2024 12:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  16 APR 2024 11:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -309,17 +309,8 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 File: l3backend-pdftex.def 2024-03-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box53
-) (./BeyerEKimAFinalPaper.aux
-
-LaTeX Warning: Label `fig:figs' multiply defined.
-
-
-LaTeX Warning: Label `fig:figs' multiply defined.
-
-
-LaTeX Warning: Label `fig:figs' multiply defined.
-
 )
+No file BeyerEKimAFinalPaper.aux.
 \openout1 = `BeyerEKimAFinalPaper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
@@ -410,51 +401,26 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
 (/home/guest/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<BeyerEKimAFinalPaper_files/figure-latex/plot 1-1.pdf, id=4, 469.755pt x 289.08pt>
-File: BeyerEKimAFinalPaper_files/figure-latex/plot 1-1.pdf Graphic file (type pdf)
-<use BeyerEKimAFinalPaper_files/figure-latex/plot 1-1.pdf>
-Package pdftex.def Info: BeyerEKimAFinalPaper_files/figure-latex/plot 1-1.pdf  used on input line 101.
-(pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAFinalPaper_files/figure-latex/plot 2-1.pdf, id=5, 469.755pt x 289.08pt>
-File: BeyerEKimAFinalPaper_files/figure-latex/plot 2-1.pdf Graphic file (type pdf)
-<use BeyerEKimAFinalPaper_files/figure-latex/plot 2-1.pdf>
-Package pdftex.def Info: BeyerEKimAFinalPaper_files/figure-latex/plot 2-1.pdf  used on input line 110.
-(pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAFinalPaper_files/figure-latex/plot 3-1.pdf, id=6, 469.755pt x 289.08pt>
-File: BeyerEKimAFinalPaper_files/figure-latex/plot 3-1.pdf Graphic file (type pdf)
-<use BeyerEKimAFinalPaper_files/figure-latex/plot 3-1.pdf>
-Package pdftex.def Info: BeyerEKimAFinalPaper_files/figure-latex/plot 3-1.pdf  used on input line 119.
-(pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-<BeyerEKimAFinalPaper_files/figure-latex/plot 4-1.pdf, id=7, 469.755pt x 289.08pt>
-File: BeyerEKimAFinalPaper_files/figure-latex/plot 4-1.pdf Graphic file (type pdf)
-<use BeyerEKimAFinalPaper_files/figure-latex/plot 4-1.pdf>
-Package pdftex.def Info: BeyerEKimAFinalPaper_files/figure-latex/plot 4-1.pdf  used on input line 128.
-(pdftex.def)             Requested size: 328.82626pt x 202.35461pt.
-[1
+) [1
 
-{/home/guest/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/guest/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <./BeyerEKimAFinalPaper_files/figure-latex/plot 1-1.pdf>] [2 <./BeyerEKimAFinalPaper_files/figure-latex/plot 2-1.pdf> <./BeyerEKimAFinalPaper_files/figure-latex/plot 3-1.pdf>] [3 <./BeyerEKimAFinalPaper_files/figure-latex/plot 4-1.pdf>] (./BeyerEKimAFinalPaper.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-03-14>
- ***********
+{/home/guest/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/guest/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 
-LaTeX Warning: There were multiply-defined labels.
+! LaTeX Error: Unicode character β (U+03B2)
+               not set up for use with LaTeX.
 
- ) 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 ...del, Fit\_1, where turbine\_presence = β
+                                                  0. The 
 Here is how much of TeX's memory you used:
- 10906 strings out of 476064
- 167317 string characters out of 5792592
- 1933493 words of memory out of 5000000
- 32857 multiletter control sequences out of 15000+600000
+ 10829 strings out of 476064
+ 164694 string characters out of 5792592
+ 1939493 words of memory out of 5000000
+ 32800 multiletter control sequences out of 15000+600000
  583094 words of font info for 57 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,6n,93p,473b,446s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/guest/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb>
-Output written on BeyerEKimAFinalPaper.pdf (3 pages, 127626 bytes).
-PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 89i,6n,93p,363b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
+!  ==> Fatal error occurred, no output PDF file produced!
