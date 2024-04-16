@@ -2,11 +2,14 @@
 title: "The Effects of Offshore Wind on Bottlenose Dolphin Strandings along the United States East Coast"
 author: "Emma Beyer & Ayoung Kim"
 date: "2024-04-12"
-output: pdf_document
+output:
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 ```{r output setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 ```{r setup, include=FALSE}
@@ -264,14 +267,15 @@ Because the variables we aim to evaluate are binary and categorical, we employed
 
 After cleaning the data to remove all the blank, unknown, and NA values there were a total of 1419 recorded strandings from 2017-2019 along the east coast.  80 of these strandings were recorded in states with active offshore wind development. Overall, 15 states were included within this dataset, and only 4 states had active offshore wind development during our study period. These states were New York, Massachusetts, Rhode Island, and Virginia.  When looking at the number of stranding per state, Texas (306) and Florida (295) had the most strandings while Maine (1) and Rhode Island (1) had the least.  When looking at the length of stranded dolphins, the mean length across all 15 states was 194.2091 (cm) and the variance was 65.37 (cm) while the mean length across the 4 offshore wind states was 198.175 (cm) and the variance was 78.36 (cm).  When looking at the age class of each stranded dolphin, the mean length for each age class was PUP/CALF 107.1709 cm , YEARLING 163.3439 cm, SUBADULT 194.0060 cm, and ADULT 242.8233 cm.  The number of strandings per age class for all states were ADULT 669, PUP/CALF 335, SUBADULT 308, and YEARLING 107, while the number of strandings per age class for offshore wind states were ADULT 32, PUP/CALF 21, SUBADULT 26, and YEARLING 1.  When looking at the strandings by dolphin sex, the mean length for females was 191.8816 cm and 195.8511 cm for males.  Within the whole dataset there were 587 stranded females and 832 stranded males, while in the states with offshore wind there were 32 stranded females and 48 stranded males. 
 
-###Fit 1
+### Fit 1
 
 First of all, to assess the probability of turbine presence, we fitted an intercept-only model, Fit_1, where turbine_presence = β0. The estimated value of β0 is -2.8177, which represents the log odds of bottlenose strandings in the states with offshore wind turbines. According to the summary, the predicted probability of finding the stranded bottlenose dolphin in the states with offshore wind farms in the east coast area would be  exp(-2.8177)=0.0597, approximately 5.97%. 
 
-###Fit 2
+### Fit 2
 
-$$H0: There is no difference in offshore wind turbine presence across different age classes. $$
-$$Ha: There is a difference in offshore wind turbine presences across different age classes. $$
+H0: There is no difference in offshore wind turbine presence across different age classes.
+
+Ha: There is a difference in offshore wind turbine presences across different age classes.
 
 We hypothesized that there is no difference in offshore wind turbine presence across different age classes to evaluate how the presence of wind turbines affected strandings across four different age groups: Adult, Yearling, Subadult, and Pup/calf. The estimate of B0 is -2.99, representing the log odds of finding offshore wind turbines at the  locations where the adult bottlenose dolphin strandings were found. The prob = exp(0.05). Compared to Fit_1, the estimated value slightly decreased. The reference is adult strandings, and B1, B2, and B3 represent Pup/calf, Subadult, and Yearling, respectively. Each of these estimates represents an incremental adjustment to the intercept.
 
@@ -281,21 +285,23 @@ We found that the predicted probability of pup/calf and subadult strandings were
 
 Also, using the QQplots, we assessed  how well the model fits the data and the assumptions. We used par(mfrow=c(2,2)) to display 4 plots, Residuals vs Fitted, Q-Q Residuals, Scale-Location, and Residuals vs Leverage plots. The Residuals vs Fitted graph presents that the data is linear and homoscedasticity for the most part. In the Q-Q Residuals plot, the two groups of clustered points were found. More than half of the points followed the line, but from 2.0 theoretical quantiles, the points were not clustered along the line. Also the plot shows the 2 representative points outside of normality (645, 1116). The Scale-Location plot with a gentle line presents that there is no triangular shape to the point and therefore the data is homoscedastic. The Residual vs Leverage plot suggests that the points (720, 1026, 1116) have the biggest effects of the parameter estimates. These results suggest that the model regression lines reasonably fit the data. 
 
-###Fit 3
+### Fit 3
 
 We conducted an additional regression model matching the length of bottlenose strandings and the states to test the hypothesis below, evaluating how the lengths differ across states using the cleaned_strandings data.
 
-$$H0: There is no difference in the length of bottlenose dolphin strandings across the states.$$
-$$Ha: There is a difference in the length of bottlenose dolphin strandings across the states.$$
+H0: There is no difference in the length of bottlenose dolphin strandings across the states.
+
+Ha: There is a difference in the length of bottlenose dolphin strandings across the states.
 
 The reference for the model is AL, with an estimated value of 188.747. This indicates the estimated mean length of the bottlenose dolphin strandings in AL. Compared to AL, DE, NJ, TX, and VA have decreases in length of 16.251, 109.191, 8.427, and 4.075, respectively, while FL, GA, LA, MA, MD, ME, MS, NC, NY, RI, SC, and TX show increases in length of 15.847. Based on the results, we found that ME and RI had significantly higher values in length compared to AL, while NJ had relatively lower values in length. 
 
-###Fit 4
+### Fit 4
 
 For this model the value of $\beta$~0~ is 260.89 cm. This is the expected length of stranded dolphins in MA. The value of $VA\beta$~1~ is -76.22 cm. This is the difference in expected length between MA and VA.  $NY\beta$~2~ is -59.98 cm. This is the difference in expected length between MA and NY. The value of $RI\beta$~3~ is 42.11 cm. This is the difference in expected length between MA and RI. 
 
-$$H_0: No difference in length between the states with offshore wind $$ 
-$$H_a: There is a difference in length between the states with offshore wind$$
+H_0: No difference in length between the states with offshore wind. 
+
+H_a: There is a difference in length between the states with offshore wind.
 
 There was a significant difference in length of dolphins found in Massachusetts ($R^2$=0.08104, $p$=2.62e$^{-16}$) and in Virginia ($R^2$=0.08104, $p$=0.00619$) . Therefore, we can reject the null hypothesis that there is no difference in length of stranded dolphins in states with offshore wind.
 
@@ -334,6 +340,8 @@ https://www.energy.gov/eere/wind/how-do-wind-turbines-work (04/04/2024)
 
 National Grid. 2024. Onshore vs Offshore Wind Energy: What’s the Difference? 
 Onshore vs offshore wind energy: what’s the difference? | National Grid Group (04/04/2024)
+
+\newpage
 
 ## Appendix
 
